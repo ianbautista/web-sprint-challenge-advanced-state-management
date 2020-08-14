@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { connect } from "react-redux";
 
 const App = (props) => {
 	return (
@@ -12,4 +13,17 @@ const App = (props) => {
 	);
 };
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		isLoading: state.isLoading,
+		smurfs: state.smurfs,
+		error: state.error,
+		// values: {
+		// 	name: state.smurfs.name,
+		// 	age: state.smurfs.age,
+		// 	height: state.smurfs.height,
+		// },
+	};
+};
+
+export default connect(mapStateToProps, {})(App);
