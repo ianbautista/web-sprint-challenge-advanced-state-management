@@ -24,11 +24,11 @@ const mapStateToProps = (state) => {
 		isLoading: state.isLoading,
 		smurfs: state.smurfs,
 		error: state.error,
-		// values: {
-		// 	name: state.smurfs.name,
-		// 	age: state.smurfs.age,
-		// 	height: state.smurfs.height,
-		// },
+		values: {
+			name: state.smurfs.name,
+			age: state.smurfs.age,
+			height: state.smurfs.height,
+		},
 	};
 };
 
