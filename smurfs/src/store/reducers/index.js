@@ -1,4 +1,9 @@
-import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_ERROR } from "../actions";
+import {
+	FETCH_SMURFS_START,
+	FETCH_SMURFS_SUCCESS,
+	FETCH_SMURFS_ERROR,
+	HANDLE_CHANGES,
+} from "../actions";
 
 const initialState = {
 	isLoading: false,
@@ -35,6 +40,16 @@ export const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				error: action.payload,
+			};
+		case HANDLE_CHANGES:
+			const name = action.payload.target.name;
+			const value = action.payload.target.value;
+			return {
+				...state,
+				values: {
+					...state.values,
+					[name]: value,
+				},
 			};
 		default:
 			return state;
