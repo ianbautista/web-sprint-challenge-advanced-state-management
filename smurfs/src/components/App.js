@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchSmurfs, addSmurf, handleChanges } from "../store/actions";
 import AddSmurfForm from "./AddSmurfForm";
 import SmurfsList from "./SmurfsList";
+import Header from "./Header";
 
 const App = (props) => {
 	console.log(props);
@@ -14,7 +15,7 @@ const App = (props) => {
 
 	return (
 		<div className="App">
-			<h1>SMURFS! Village</h1>
+			<Header />
 			{props.isLoading && <h4>Loading smurf data...</h4>}
 			{props.error && <p className="error">What, woah...{props.error}</p>}
 			<AddSmurfForm addSmurf={addSmurf} handleChanges={handleChanges} values={props.values} />
