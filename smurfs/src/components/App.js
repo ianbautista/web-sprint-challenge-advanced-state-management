@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 
+import { fetchSmurfs } from "../store/actions";
+
 const App = (props) => {
+	useEffect(() => {
+		props.fetchSmurfs();
+	}, []);
+
 	return (
 		<div className="App">
 			<h1>SMURFS! W/Redux</h1>
@@ -26,4 +32,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, { fetchSmurfs })(App);
