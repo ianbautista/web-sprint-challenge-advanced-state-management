@@ -1,16 +1,40 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
-  }
-}
+import { connect } from "react-redux";
 
-export default App;
+import { fetchSmurfs, addSmurf, handleChanges } from "../store/actions";
+import AddSmurfForm from "./AddSmurfForm";
+import SmurfsList from "./SmurfsList";
+import Header from "./Header";
+
+const App = (props) => {
+	console.log(props);
+	useEffect(() => {
+		props.fetchSmurfs();
+	}, []);
+
+	return (
+		<div className="App">
+			<Header />
+			{props.isLoading && <h4>Loading smurf data...</h4>}
+			{props.error && <p className="error">What, woah...{props.error}</p>}
+			<AddSmurfForm addSmurf={addSmurf} handleChanges={handleChanges} values={props.values} />
+			<SmurfsList smurfs={props.smurfs} />
+		</div>
+	);
+};
+
+const mapStateToProps = (state) => {
+	return {
+		isLoading: state.isLoading,
+		smurfs: state.smurfs,
+		error: state.error,
+		values: {
+			name: state.smurfs.name,
+			age: state.smurfs.age,
+			height: state.smurfs.height,
+		},
+	};
+};
+
+export default connect(mapStateToProps, { fetchSmurfs, addSmurf, handleChanges })(App);
